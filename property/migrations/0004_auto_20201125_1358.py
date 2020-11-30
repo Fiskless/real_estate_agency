@@ -11,6 +11,8 @@ def is_new_building(apps, schema_editor):
     for flat in flats:
         if flat.construction_year >= 2015:
             flat.new_building = True
+        else:
+            flat.new_building = False
         flat.save()
 
 
@@ -20,8 +22,7 @@ def move_backward(apps, schema_editor):
     flats = Flat.objects.all()
 
     for flat in flats:
-        if flat.construction_year >= 2015:
-            flat.new_building = True
+        flat.new_building = None
         flat.save()
 
 
