@@ -16,6 +16,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG").lower() in ['yes', '1', 'true']
+DATABASE = os.getenv("DATABASE")
 
 ALLOWED_HOSTS = []
 
@@ -102,5 +103,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 DATABASES = {
-    'default': dj_database_url.parse(os.getenv("DATABASE", "sqlite:///db.sqlite3")),
+    'default': dj_database_url.parse(DATABASE),
 }
