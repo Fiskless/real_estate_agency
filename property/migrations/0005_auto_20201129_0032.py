@@ -18,10 +18,29 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Complaint',
             fields=[
-                ('user_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('complain_text', models.CharField(blank=True, max_length=200, verbose_name='Текст жалобы')),
-                ('flat', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='flat_complained', to='property.Flat', verbose_name='Квартира, на которую жаловались')),
-                ('who_complained', models.ForeignKey(blank=True, max_length=200, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='human_name', to=settings.AUTH_USER_MODEL, verbose_name='Кто жаловался')),
+                ('user_ptr', models.OneToOneField(
+                    auto_created=True,
+                    on_delete=django.db.models.deletion.CASCADE,
+                    parent_link=True, primary_key=True,
+                    serialize=False,
+                    to=settings.AUTH_USER_MODEL)),
+                ('complain_text', models.CharField(blank=True, max_length=200,
+                                                   verbose_name='Текст жалобы')),
+                ('flat', models.ForeignKey(
+                    blank=True,
+                    null=True,
+                    on_delete=django.db.models.deletion.SET_NULL,
+                    related_name='flat_complained',
+                    to='property.Flat',
+                    verbose_name='Квартира, на которую жаловались')),
+                ('who_complained', models.ForeignKey(
+                    blank=True,
+                    max_length=200,
+                    null=True,
+                    on_delete=django.db.models.deletion.SET_NULL,
+                    related_name='human_name',
+                    to=settings.AUTH_USER_MODEL,
+                    verbose_name='Кто жаловался')),
             ],
             options={
                 'verbose_name': 'user',
@@ -36,6 +55,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='flat',
             name='liked_by',
-            field=models.ManyToManyField(related_name='liked_flats', to='property.Complaint', verbose_name='Кто лайкнул'),
+            field=models.ManyToManyField(related_name='liked_flats',
+                                         to='property.Complaint',
+                                         verbose_name='Кто лайкнул'),
         ),
     ]

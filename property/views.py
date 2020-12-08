@@ -29,8 +29,6 @@ def show_flats(request):
     if min_price or max_price:
         flats = flats.exclude(price=None)
 
-
-
     towns = Flat.objects.values_list('town', flat=True).distinct().order_by('town')
     return render(request, 'flats_list.html', {
         'flats': flats[:10],

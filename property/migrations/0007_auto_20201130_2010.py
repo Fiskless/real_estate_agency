@@ -12,10 +12,13 @@ def phone_parser(apps, schema_editor):
     for flat in flats:
         number_parsed = phonenumbers.parse(flat.owners_phonenumber, "RU")
         if phonenumbers.is_valid_number(number_parsed):
-            pure_phone = phonenumbers.format_number(number_parsed, phonenumbers.PhoneNumberFormat.E164)
+            pure_phone = phonenumbers.format_number(
+                number_parsed,
+                phonenumbers.PhoneNumberFormat.E164
+            )
             flat.owner_pure_phone = pure_phone
         else:
-            flat.owner_pure_phone= 'Incorrect number'
+            flat.owner_pure_phone = 'Incorrect number'
         flat.save()
 
 
@@ -28,6 +31,7 @@ def move_backward(apps, schema_editor):
         flat.owner_pure_phone = None
         flat.save()
 
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -37,5 +41,3 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RunPython(phone_parser, move_backward)
     ]
-
-

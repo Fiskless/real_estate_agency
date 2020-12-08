@@ -10,10 +10,11 @@ def load_owners(apps, schema_editor):
     flats = Flat.objects.all()
 
     for flat in flats:
-        Owner.objects.get_or_create(owner=flat.owner,
-                                owners_phonenumber=flat.owners_phonenumber,
-                                owner_pure_phone=flat.owner_pure_phone,
-                                )
+        Owner.objects.get_or_create(
+            owner=flat.owner,
+            owners_phonenumber=flat.owners_phonenumber,
+            owner_pure_phone=flat.owner_pure_phone,
+        )
 
 
 def move_backward(apps, schema_editor):
